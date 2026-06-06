@@ -24,6 +24,8 @@ if(isset($_POST['login']))
         $_SESSION['role'] = $user['role'];
 
         echo "Login Successful";
+        header("Location: dashboard.php");
+        exit();
     }
     else
     {
@@ -44,5 +46,6 @@ if(isset($_POST['login']))
     <input type="password" name="password" placeholder="Password">
     <button type="submit" name="login">Login</button>
 </form>
+<a href="logout.php">logout</a>
 </body>
 </html>

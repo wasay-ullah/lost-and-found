@@ -12,7 +12,7 @@ $item_title = $_POST["title"];
 $item_description = $_POST["description"];
 $item_category = $_POST["category"];
 $item_location = $_POST["location"];
-$item_status = "Pending";
+$item_status = "missing";
 $user_id = $_SESSION["user_id"];
 $q_insert_item=("
 INSERT INTO items(user_id,item_type,title,description,category,location,status)

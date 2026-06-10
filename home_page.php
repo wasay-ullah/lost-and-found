@@ -8,7 +8,8 @@ if(!$conn){
 }
 
 // Fetch all items from item_db table
-$sql = "SELECT * FROM items";
+$item_status = isset($_SESSION['item_status']) ? mysqli_real_escape_string($conn, $_SESSION['item_status']) : 'missing';
+$sql = "SELECT * FROM items WHERE status='$item_status'";
 $result = mysqli_query($conn, $sql);
 
 if(!$result){
@@ -256,7 +257,7 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </nav>
             <div class="auth-links">
                 <?php if(isset($_SESSION['user_id'])): ?>
-                    <span>Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?>!</span>
+                    <span>Welcome, <?php echo htmlspecialchars($_SESSION['name'] ?? 'User'); ?>!</span>
                     <a href="logout.php" class="btn btn-logout">Logout</a>
                 <?php else: ?>
                     <a href="login.php" class="btn btn-login">Login</a>

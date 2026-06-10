@@ -23,6 +23,21 @@ if(!$result){
 }
 
 $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+function mark_found($item_id){
+    global $conn, $user_id;
+
+    $item_id = mysqli_real_escape_string($conn, $item_id);
+    $query = "UPDATE items SET status = 'found' WHERE id = '$item_id' AND user_id = '$user_id'";
+    mysqli_query($conn, $query);
+}
+
+if(isset($_POST['m_found']) && !empty($_POST['item_id'])){
+    mark_found($_POST['item_id']);
+    header('Location: my_items.php');
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +123,11 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 echo "<p><strong>Description:</strong> " . htmlspecialchars($item['description'] ?? 'N/A') . "</p>";
                 echo "<p><strong>Price:</strong> $" . htmlspecialchars($item['price'] ?? '0') . "</p>";
                 echo "<p><strong>Category:</strong> " . htmlspecialchars($item['category'] ?? 'N/A') . "</p>";
-                echo "<p><strong>Date Added:</strong> " . htmlspecialchars($item['created_at'] ?? 'N/A') . "</p>";
+                echo "<p><strong>Status:</strong> " . htmlspecialchars($item['status'] ?? 'N/A') . "</p>";
+                echo "<form method='post'>
+                    <input type='hidden' name='item_id' value='" . htmlspecialchars($item['id']) . "'>
+                    <button type='submit' name='m_found'>Mark as found</button>
+                </form>";
                 echo "</div>";
             }
             echo "</div>";

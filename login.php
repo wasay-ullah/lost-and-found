@@ -22,10 +22,16 @@ if(isset($_POST['login']))
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['name'] = $user['name'];
         $_SESSION['role'] = $user['role'];
-
+        if ($user['role']=="admin") {
+            header("Location:admin\a_dashboard.php");
+            exit();
+        }
+        else if ($user["role"]== "user") {
         echo "Login Successful";
         header("Location: dashboard.php");
         exit();
+        }
+        
     }
     else
     {

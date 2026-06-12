@@ -276,6 +276,11 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="section-title">
             Available Items (<?php echo count($items); ?>)
         </div>
+        <script>
+            add_details(){
+                    
+            }
+        </script>
         
         <?php
         if(count($items) > 0){

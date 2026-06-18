@@ -18,9 +18,15 @@ $item_category = $_POST["category"];
 $item_location = $_POST["location"];
 $item_status = "missing";
 $user_id = $_SESSION["user_id"];
+$image_name =time() . "_" . $_FILES['image']['name'];
+$temp_name = $_FILES['image']['tmp_name'];
+move_uploaded_file(
+    $temp_name,
+    "uploads/" . $image_name
+);
 $q_insert_item=("
-INSERT INTO items(user_id,item_type,title,description,category,location,status)
-VALUES('$user_id','$item_type','$item_title','$item_description','$item_category','$item_location','$item_status')");
+INSERT INTO items(user_id,item_type,title,description,category,location,status,image)
+VALUES('$user_id','$item_type','$item_title','$item_description','$item_category','$item_location','$item_status','$image_name')");
 if (mysqli_query($connection,$q_insert_item)) {
     echo "item added successfuly";
     header("Location:dashboard.php");
@@ -211,7 +217,7 @@ else {
         <h1>Add Item</h1>
         <p class="subtitle">Report a Lost or Found Item</p>
         
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Item Type</label>
                 <div class="radio-group">
@@ -252,6 +258,10 @@ else {
             <div class="form-group">
                 <label for="location">Location</label>
                 <input type="text" name="location" id="location" placeholder="Where was it lost/found?" required>
+            </div>
+            <div class="form-group">
+                 <label for="image">Upload image</label>
+                 <input type="file" name="image">
             </div>
 
             <div class="button-group">

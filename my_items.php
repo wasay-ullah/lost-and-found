@@ -124,6 +124,7 @@ if(isset($_POST['m_found']) && !empty($_POST['item_id'])){
                 echo "<p><strong>Price:</strong> $" . htmlspecialchars($item['price'] ?? '0') . "</p>";
                 echo "<p><strong>Category:</strong> " . htmlspecialchars($item['category'] ?? 'N/A') . "</p>";
                 echo "<p><strong>Status:</strong> " . htmlspecialchars($item['status'] ?? 'N/A') . "</p>";
+                echo "<img src='uploads/" . htmlspecialchars($item['image']) . "' width='200'>";
                 echo "<form method='post'>
                     <input type='hidden' name='item_id' value='" . htmlspecialchars($item['id']) . "'>
                     <button type='submit' name='m_found'>Mark as found</button>

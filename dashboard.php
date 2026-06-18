@@ -101,6 +101,15 @@ else
             transform: translateY(-2px);
         }
 
+        .nav-links a.claims-btn {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .nav-links a.claims-btn:hover {
+            background: #8e44ad;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -261,6 +270,7 @@ else
         <div class="nav-links">
             <a href="add_item.php" class="add-btn">+ Add Item</a>
             <a href="my_items.php" class="items-btn">My Items</a>
+            <a href="my_claims.php" class="claims-btn">My Claims</a>
             <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </div>
@@ -291,6 +301,13 @@ else
                 <h3>Browse All</h3>
                 <p>Search through all lost and found items</p>
                 <a href="home_page.php">Browse</a>
+            </div>
+
+            <div class="action-card">
+                <div class="icon">✅</div>
+                <h3>My Claims</h3>
+                <p>Review claims from finders on your items</p>
+                <a href="my_claims.php">View Claims</a>
             </div>
         </div>
 

@@ -114,6 +114,31 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
             background-color: #229954;
         }
         
+        .btn-claim {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .btn-claim:hover {
+            background-color: #e67e22;
+        }
+        
+        .item-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .item-actions a {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 30px auto;
@@ -294,6 +319,9 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
                 echo "</div>";
                 echo "<div class='item-body'>";
+                if(!empty($item['image'])){
+                    echo "<img src='uploads/" . htmlspecialchars($item['image']) . "' width='200'>";
+                }
                 if(!empty($item['description'])){
                     echo "<p><strong>Description:</strong><br>" . nl2br(htmlspecialchars($item['description'])) . "</p>";
                 }
@@ -304,6 +332,14 @@ $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 if(!empty($item['created_at'])){
                     echo "<div class='item-date'>Posted: " . date('M d, Y', strtotime($item['created_at'])) . "</div>";
                 }
+                
+                // Show "I Found This Item" button only if user is logged in and didn't post the item
+                if(isset($_SESSION['user_id']) && $item['user_id'] != $_SESSION['user_id']){
+                    echo "<div class='item-actions'>";
+                    echo "<a href='claim_item.php?item_id=" . htmlspecialchars($item['id']) . "' class='btn btn-claim'>I Found This Item</a>";
+                    echo "</div>";
+                }
+                
                 echo "</div>";
                 echo "</div>";
             }
